@@ -10,7 +10,7 @@ pipeline {
 
 	environment {
 		AWS_DEFAULT_REGION='us-east-1'
-		AWS_CREDENTIALS = credentials('aws-auth')
+		AWS_CREDENTIALS = credentials('aws-cred')
 		PATH = "${PATH}:${getTerraformPath()}"
 	}
 
