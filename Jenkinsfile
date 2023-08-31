@@ -10,7 +10,7 @@ pipeline {
 
 	environment {
 		AWS_DEFAULT_REGION='us-east-1'
-		AWS_CREDENTIALS = credentials('aws-cred')
+		AWS_CREDENTIALS = credentials('aws-auth')
 		PATH = "${PATH}:${getTerraformPath()}"
 	}
 
@@ -80,7 +80,7 @@ pipeline {
 		stage("k8s Deployment"){
 			steps {
 				script {
-					withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'jenkins-deployer-credentials', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://api-onyxquity-vvv-pi-k8s--k0kcfg-88036646dab74d04.elb.us-east-1.amazonaws.com') {
+					withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'jenkins-kubernetes-credential', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://api-onyxquity-pi-k8s-loca-lomnoc-3b8bb5f5312891d0.elb.us-east-1.amazonaws.com') {
 						sh returnStatus: true, script: 'kubectl create secret docker-registry regcred --docker-server=${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com --docker-username=AWS --docker-password=$(aws ecr get-login-password)'
 						sh 'kubectl apply -f k8sbook.yaml'
 						// sh 'envsubst < kjavaapps.yaml | kubectl apply -f -'
