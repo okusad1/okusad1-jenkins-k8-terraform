@@ -19,7 +19,7 @@ pipeline {
 		stage("Create s3 Bucket"){
 			steps{
 				script{
-					createS3Bucket('raycoy-aws-deploy-jenkins')
+					createS3Bucket('okusad1-raycoy-aws-deploy-jenkins')
 				}
 			}
 		}
